@@ -47,6 +47,17 @@ export default {
           this.films = response.data.results;
         }
       )
+      .get( `${this.apiTvShows}?`,{
+        params: {
+          api_key: this.idApi,
+          query: this.search
+        }
+      }) 
+      .then(
+        (response) => {
+          this.films = response.data.results;
+        }
+      )
   } 
   },
 }
