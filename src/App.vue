@@ -35,29 +35,25 @@ export default {
       this.search = value;
     },
   callServer() {
-    axios 
-      .get( `${this.apiMovies}?`,{
+    axios.all([
+      axios.get( `${this.apiMovies}?`,{
         params: {
           api_key: this.idApi,
           query: this.search
         }
-      }) 
-      .then(
-        (response) => {
-          this.films = response.data.results;
-        }
-      )
-      .get( `${this.apiTvShows}?`,{
+      }),
+      axios.get( `${this.apiTvShows}?`,{
         params: {
-          api_key: this.idApi,
-          query: this.search
+        api_key: this.idApi,
+        query: this.search
         }
-      }) 
+      })
       .then(
         (response) => {
           this.films = response.data.results;
         }
-      )
+      ) 
+    ])
   } 
   },
 }

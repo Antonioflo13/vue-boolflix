@@ -24,7 +24,7 @@ export default {
             background-color: black;
         section {
             @include wrapper;
-            padding: 80px 0 30px 0;
+            padding: 50px 0 30px 0;
         }
     }
 </style>

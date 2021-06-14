@@ -3,7 +3,7 @@
         <nav>
             <div class="nav-right">
                 <ul>
-                    <li><a href="">logo</a></li>
+                    <li><a href=""><img src="https://fontmeme.com/permalink/210614/0a43aa36584f2895324a0006b42b5d1a.png" alt="logo"></a></li>
                 </ul>
             </div>
             <div class="nav-left">
@@ -14,7 +14,7 @@
                 <li><a href="">Nuovi Arrivi</a></li>
                 <li><a href="">La mia lista</a></li>
                 <li><input type="search" name="" id="" v-model="search" @keydown="$emit('search', search)"></li>
-                <li><a href="">notifiche</a></li>
+                <li><i id="notice" class="far fa-bell"></i></li>
                 </ul>
             </div>
         </nav>
@@ -35,20 +35,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    @import '~@fortawesome/fontawesome-free/css/all.min.css';
     @import '../style/mixin.scss';
     header {
-        background-color: black;
         nav {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             width: 100%;
             position: fixed;
+            z-index: 2;
             padding: 15px 10px;
+            background-color: black;
+            img {
+                width: 60%;
+            }
+            #notice {
+                width: 20px;
+                padding: 0 10px;
+                color: white;
+            }
             ul li {
                 display: inline;
                 list-style: none;
                 a {
-                    padding: 10px 15px;
+                    padding: 10px 10px;
                     text-decoration: none;
                     color: white;
                 }
