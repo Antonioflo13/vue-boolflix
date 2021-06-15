@@ -23,9 +23,10 @@ export default {
     main {  
             height: 100vh;
             background-color: black;
+            overflow-y: auto;
         section {
             @include wrapper;
-            padding: 50px 0 30px 0;
+            padding: 0px 0 30px 0;
         }
     }
 </style>

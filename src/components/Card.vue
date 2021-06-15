@@ -53,17 +53,18 @@ computed: {
 </script>
 
 <style lang="scss" scoped>
+    @import '../style/mixin.scss';
     section {
         display: flex;
-        justify-content: space-between;
         flex-wrap: wrap;
+        @include wrapper;
         .card {
             display: flex;
             justify-content: center;
             position: relative;
-            width: 280px;
-            height: 150px;
-            margin: 1%;
+            width: calc(100% / 6 - 10px);
+            height: 120px;
+            margin: 5px;
             img {
                 width: 100%;
                 height: 100%;
