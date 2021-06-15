@@ -20,7 +20,8 @@ export default {
 
 <style lang="scss" scoped>
     @import '../style/mixin.scss';
-    main {
+    main {  
+            height: 100vh;
             background-color: black;
         section {
             @include wrapper;

@@ -13,7 +13,8 @@
                 <li><a href="">Film</a></li>
                 <li><a href="">Nuovi Arrivi</a></li>
                 <li><a href="">La mia lista</a></li>
-                <li><input type="search" name="" id="" v-model="search" @keydown="$emit('search', search)"></li>
+                <li><input type="search" name="" id="" v-if="clicked == true" v-model="search" @change="searchValue"></li>
+                <li><i id="search" class="fas fa-search" @click="clickSearch"></i></li>
                 <li><i id="notice" class="far fa-bell"></i></li>
                 </ul>
             </div>
@@ -27,9 +28,17 @@ export default {
     data () {
         return {
             search: "",
+            clicked: false,
         }
     },
     methods: {
+        searchValue() {
+            this.$emit('search', this.search);
+        },
+        clickSearch() {
+            this.clicked = true;
+            
+        }
     }
 }
 </script>
@@ -45,14 +54,15 @@ export default {
             width: 100%;
             position: fixed;
             z-index: 2;
-            padding: 15px 10px;
+            @include wrapper;
             background-color: black;
             img {
                 width: 60%;
             }
-            #notice {
+            #notice,
+            #search {
                 width: 20px;
-                padding: 0 10px;
+                padding: 0 15px;
                 color: white;
             }
             ul li {

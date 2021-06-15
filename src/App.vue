@@ -31,8 +31,8 @@ export default {
   },
   methods: {
     searchValue(value) {
-      this.callServer()
       this.search = value;
+      this.callServer()
     },
   callServer() {
     axios.all([
@@ -52,7 +52,13 @@ export default {
         (response) => {
           this.films = response.data.results;
         }
+      )
+      .catch(
+        function (error) {
+          console.log(error);
+        }
       ) 
+      
     ])
   } 
   },
