@@ -1,7 +1,33 @@
 <template>
     <main>
         <section>
-            <Card :films=films />
+            <h2>I più popolari su Boolflix</h2>
+            <article>
+            <Card v-for="(popular, index) in populars" :key="index" :item="popular"/>
+            </article>
+        </section>
+        <section>
+            <h2>I titoli del momento</h2>
+            <article>
+            <Card v-for="(topRated, index) in topRateds" :key="index" :item="topRated"/>
+            </article>
+        </section>
+        <section>
+            <h2>Drammi TV stile soap</h2>
+            <article>
+            <Card v-for="(popular, index) in populars" :key="index" :item="popular"/>
+            </article>
+        </section>
+        <section>
+            <h2>Film Italiani</h2>
+            <article>
+            <Card v-for="(popular, index) in populars" :key="index" :item="popular"/>
+            </article>
+        </section>
+        <section>
+            <article>
+            <Card v-for="(films, index) in films" :key="index" :item="films"/>
+            </article>
         </section>
     </main>
 </template>
@@ -14,19 +40,32 @@ export default {
     components: {
         Card,
     },
-    props:["films"]
+    props:["films", "populars", "topRateds"],
+    data() {
+        return {
+            transform: ""
+        }
+    }
 }
 </script>
 
 <style lang="scss" scoped>
     @import '../style/mixin.scss';
     main {  
-            height: 100vh;
-            background-color: black;
-            overflow-y: auto;
+        height: 100%;
+            background-color: #151515;
         section {
             @include wrapper;
-            padding: 0px 0 30px 0;
+            display: flex;
+            flex-direction: column;
+            padding: 0px 0 15px 0;
+            h2 {
+                padding: 10px 0;
+            }
+            article {
+                display: flex;
+                flex-wrap: wrap;
+            }
         }
     }
 </style>

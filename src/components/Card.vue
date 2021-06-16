@@ -1,27 +1,24 @@
 <template>
-    <section>
-        <div class="card" v-for="(film, index) in films" :key="index">
-            <img v-if="film.poster_path == null & film.backdrop_path == null" src="https://gazzettadiparma-stage.dsharecloud.com/static/img/foglia/locandina-non-disponibile.jpg" :alt="film.title">
-            <img v-else-if="film.backdrop_path != null" :src="preLink + film.backdrop_path" :alt="film.title">
-            <img v-else :src="preLink + film.poster_path" :alt="film.title">
-        <div class="layover">
-            <h4>Titolo: {{film.name}}</h4>
-            <h4>Titolo originale: {{film.original_title}}</h4>
-            <img id="flag" src="../assets/images/en.png" v-if="film.original_language == 'en'">
-            <h4 v-else>Lingua: {{film.original_language}}</h4>
-            <img id="flag" src="../assets/images/it.png" v-if="film.original_language == 'it'">
-            <h4 v-else>Lingua: {{film.original_language}}</h4>
-            <h4> Voto: <i id="star" :class="number <= voteRound ?'fas fa-star' : 'far fa-star'" v-for="number in 5" :key="number"></i></h4>
-            <h4>Overview: {{film.overview}}...</h4>
+        <div class="card">
+            <img v-if="item.poster_path == null & item.backdrop_path == null" src="https://gazzettadiparma-stage.dsharecloud.com/static/img/foglia/locandina-non-disponibile.jpg" :alt="item.title">
+            <img v-else-if="item.backdrop_path != null" :src="preLink + item.backdrop_path" :alt="item.title">
+            <img v-else :src="preLink + item.poster_path" :alt="item.title">
+            <div class="layover">
+                <h4 v-if="item.name">Titolo <br> {{item.name}}</h4>
+                <h4 v-if="item.original_title">Titolo originale: {{item.original_title}}</h4>
+                <img id="flag" src="../assets/images/en.png" v-if="item.original_language == 'en'">
+                <img id="flag" src="../assets/images/it.png" v-else-if="item.original_language == 'it'">
+                <h4 v-else>Lingua: {{item.original_language}}</h4>
+                <h4><i id="star" :class="number <= vote ?'fas fa-star' : 'far fa-star'" v-for="number in 5" :key="number"></i></h4>
+                <h4>Overview <br> {{item.overview.slice(0,110) }}...</h4>
+            </div>
         </div>
-        </div>
-    </section>
 </template>
 
 <script>
 export default {
 name: "Card",
-props:["films"],
+props:["item"],
 data () {
     return {
         preLink: "https://image.tmdb.org/t/p/w342",
@@ -31,33 +28,16 @@ data () {
 methods: {
     
 },
-updated() {
-    this.films.forEach(element => {
-        if (element.overview.length > 50) {
-            element.overview = element.overview.slice(0,100);
-        }
-    });
-},
 computed: {
     vote () {
-
-        this.films.forEach(element => {
-        this.voteRound = Math.round(element.vote_average/2);
-        });
-        console.log(this.voteRound);
-        return this.voteRound;
+        return Math.round(this.item.vote_average/2);
     }
-
 }
 }
 </script>
 
 <style lang="scss" scoped>
     @import '../style/mixin.scss';
-    section {
-        display: flex;
-        flex-wrap: wrap;
-        @include wrapper;
         .card {
             display: flex;
             justify-content: center;
@@ -70,11 +50,15 @@ computed: {
                 height: 100%;
                 object-fit: initial;
                 object-position: center;
+                border-radius: 3%;
             }
-        }
-    }   
+        } 
         .layover {
             display: none;
+            font-size: 7px;
+            h4 {
+                padding: 2px;
+            }
         }
         .card:hover .layover {
             display: inline;
@@ -83,14 +67,25 @@ computed: {
             width: 100%;
             height: 100%;
             padding: 10px;
-            background-color: rgba($color: #525050, $alpha: 0.7);
+            margin-left: 30px;
+            border-radius: 3%;
+            overflow: hidden;
+            animation-name: example;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+            background-color: #151515;
+            cursor: pointer;
+        }
+            @keyframes example {
+            from {transform: scale(1,1);}
+            to {transform: scale(1.5,3);}
+            }
             #star {
-                width: 30px;
+                font-size: 10px;
                 color: rgb(247, 200, 154);
             }
             #flag {
                 width: 30px;
                 height: 10px;
             }
-        }
 </style>

@@ -13,15 +13,17 @@
             </div>
             <div class="nav-left">
                 <ul>
-                <li><input type="search" name="" id="" placeholder="Titoli" v-if="clicked == true" v-model="search" @change="searchValue"></li>
-                <li><i id="search" class="fas fa-search" @click="clickSearch"></i></li>
+                <li> 
+                    <input type="search" name="" id="" placeholder="Titoli" v-model="search" v-if="clicked" @change="searchValue">
+                </li>
+                <li><i id="search" class="fas fa-search" @click="clicked=!clicked"></i></li>
                 <li><i id="notice" class="far fa-bell"></i></li>
                 </ul>
             </div>
         </nav>
         <div class="jumbotron">
             <video src="../assets/Stranger Things 4 _ Undici, stai ascoltando.mp4" width="100%" height="550px" autoplay muted loop=1 ></video>
-            <audio src="../assets/videoplayback.mp4" controls autoplay @canplay="click"></audio>
+            <audio src="../assets/videoplayback.mp4" autoplay @canplay="click"></audio>
         </div>
     </header>
 </template>
@@ -32,7 +34,7 @@ export default {
     data () {
         return {
             search: "",
-            clicked: false,
+            clicked: true,
         }
     },
     methods: {
@@ -53,7 +55,7 @@ export default {
     @import '~@fortawesome/fontawesome-free/css/all.min.css';
     @import '../style/mixin.scss';
     header {
-        background-color: black;
+        background-color: #151515;
         nav {
             display: flex;
             justify-content: space-between;
@@ -108,6 +110,19 @@ export default {
                 object-fit: cover;
             }
         }
+        /* Enter and leave animations can use different */
+    /* durations and timing functions.              */
+    .slide-fade-enter-active {
+    transition: all .3s ease;
+    }
+    .slide-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateX(10px);
+    opacity: 0;
+    }
     }
     
 </style>
