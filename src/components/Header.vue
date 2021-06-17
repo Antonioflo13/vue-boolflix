@@ -13,17 +13,17 @@
             </div>
             <div class="nav-left">
                 <ul>
-                <li> 
-                    <input type="search" name="" id="" placeholder="Titoli" v-model="search" v-if="clicked" @change="searchValue">
-                </li>
-                <li><i id="search" class="fas fa-search" @click="clicked=!clicked"></i></li>
-                <li><i id="notice" class="far fa-bell"></i></li>
+                    <li>
+                        <input type="search" name="" id="" placeholder="Titoli" v-model="search" v-if="clicked" @change="searchValue">
+                    </li>
+                    <li><i id="search" class="fas fa-search" @click="clicked=!clicked"></i></li>
+                    <li><i id="notice" class="far fa-bell"></i></li>
                 </ul>
             </div>
         </nav>
         <div class="jumbotron">
-            <video src="../assets/Stranger Things 4 _ Undici, stai ascoltando.mp4" width="100%" height="550px" autoplay muted loop=1 ></video>
-            <audio src="../assets/videoplayback.mp4" autoplay loop=1 @canplay="click"></audio>
+            <video src="../assets/Stranger Things 4 _ Undici, stai ascoltando.mp4" width="100%" height="550px" autoplay muted loop=1></video>
+            <audio id="audio" src="../assets/videoplayback.mp4" loop=1></audio>
         </div>
     </header>
 </template>
@@ -45,19 +45,20 @@ export default {
         clickSearch() {
             this.clicked = true;
         },
-        click(event) {
-            console.log(event);
+        audio() {
+            document.getElementById('audio').play();
         },
         scrolling(){
-      if(window.pageYOffset>0){
-        if(this.topOfPage) this.topOfPage = false
-      } else {
-        if(!this.topOfPage) this.topOfPage = true
-      }
+            if(window.pageYOffset>0){
+            if(this.topOfPage) this.topOfPage = false;
+            } else {
+            if(!this.topOfPage) this.topOfPage = true;
+        }
     }
     },
     beforeMount() {
         window.addEventListener('scroll', this.scrolling);
+        window.addEventListener('scroll', this.audio);
     }
 }
 </script>
@@ -124,19 +125,6 @@ export default {
                 object-fit: cover;
             }
         }
-        /* Enter and leave animations can use different */
-    /* durations and timing functions.              */
-    .slide-fade-enter-active {
-    transition: all .3s ease;
-    }
-    .slide-fade-leave-active {
-    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-    }
-    .slide-fade-enter, .slide-fade-leave-to
-    /* .slide-fade-leave-active below version 2.1.8 */ {
-    transform: translateX(10px);
-    opacity: 0;
-    }
     }
     
 </style>
