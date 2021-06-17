@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header @search="searchValue"/>
-    <Main :films=films :populars=populars :topRateds="topRateds" />
+    <Main :films="films" :series="series" :populars="populars" :topRateds="topRateds" :soap="soap" :action="action"/>
     <Footer/>
   </div>
 </template>
@@ -28,14 +28,21 @@ export default {
       idApi: "3890dce83d488cedadba197d9aad9826",
       films: [],
       populars: [],
+      series: [],
       topRateds: [],
-      search: ""
+      soap: [],
+      action: [],
+      search: "",
     }
   },
   methods: {
     searchValue(value) {
-      this.search = value;
-      this.callServer()
+      this.search = value.trim();
+      if (!value == '') {
+        this.callServer()
+      } else {
+        this.films = "";
+      }
     },
   callServer() {
     axios.all([
@@ -44,7 +51,12 @@ export default {
           api_key: this.idApi,
           query: this.search
         }
-      }),
+      })
+      .then(
+        (response) => {
+          this.films = response.data.results.slice(0,20);
+        }
+      ),
       axios.get( `${this.apiTvShows}?`,{
           params: {
           api_key: this.idApi,
@@ -53,7 +65,7 @@ export default {
       })
       .then(
         (response) => {
-          this.films = response.data.results.slice(0,6);
+          this.series = response.data.results.slice(0,20);
         }
       )
       .catch(
@@ -75,22 +87,32 @@ export default {
       .then(
         (response) => {
           this.populars = response.data.results.slice(0,6);
+          const newArrayAction = response.data.results.slice(0,10).filter(
+            (element) => {
+              return element.genre_ids[0] == 28;
+            }
+          )
+        this.action = newArrayAction;
         }
       ),
       axios.get( `${this.apiTopRated}?`,{
           params: {
           api_key: this.idApi,
-          languages: '=it-IT',
-          page: 1
+          languages: "=it-IT",
         }
       })
       .then(
         (response) => {
           this.topRateds = response.data.results.slice(0,6);
+          const newArray = response.data.results.slice(0,18).filter(
+            (element) => {
+              return element.genre_ids[0] == 18;
+            }
+          )
+          this.soap = newArray;
         }
-      )
-
-    ]) 
+      ),
+    ])
   }
 }
 </script>

@@ -1,16 +1,16 @@
 <template>
         <div class="card">
+            <h4>{{!item.title ? item.name : item.title}}</h4>
             <img v-if="item.poster_path == null & item.backdrop_path == null" src="https://gazzettadiparma-stage.dsharecloud.com/static/img/foglia/locandina-non-disponibile.jpg" :alt="item.title">
             <img v-else-if="item.backdrop_path != null" :src="preLink + item.backdrop_path" :alt="item.title">
             <img v-else :src="preLink + item.poster_path" :alt="item.title">
             <div class="layover">
-                <h4 v-if="item.name">Titolo <br> {{item.name}}</h4>
-                <h4 v-if="item.original_title">Titolo originale: {{item.original_title}}</h4>
+                <h3>Titolo originale <br> {{!item.original_title ? item.original_name : item.original_title}}</h3>
                 <img id="flag" src="../assets/images/en.png" v-if="item.original_language == 'en'">
                 <img id="flag" src="../assets/images/it.png" v-else-if="item.original_language == 'it'">
-                <h4 v-else>Lingua: {{item.original_language}}</h4>
-                <h4><i id="star" :class="number <= vote ?'fas fa-star' : 'far fa-star'" v-for="number in 5" :key="number"></i></h4>
-                <h4>Overview <br> {{item.overview.slice(0,110) }}...</h4>
+                <h3 v-if="item.original_language">Lingua: {{item.original_language}}</h3>
+                <h3><i id="star" :class="number <= vote ?'fas fa-star' : 'far fa-star'" v-for="number in 5" :key="number"></i></h3>
+                <h3>Overview <br> {{item.overview.slice(0,110) }}...</h3>
             </div>
         </div>
 </template>
@@ -45,6 +45,14 @@ computed: {
             width: calc(100% / 6 - 10px);
             height: 120px;
             margin: 5px;
+            h4 {
+                font-size: 18px;
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                color: #e64c00;
+                text-shadow: 0px -1px 3px #151515;
+            }
             img {
                 width: 100%;
                 height: 100%;

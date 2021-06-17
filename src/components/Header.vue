@@ -1,6 +1,6 @@
 <template>
     <header>
-        <nav>
+        <nav :class="{ 'onScroll': !topOfPage}">
             <div class="nav-right">
                 <ul>
                     <li><a href=""><img src="https://fontmeme.com/permalink/210614/0a43aa36584f2895324a0006b42b5d1a.png" alt="logo"></a></li>
@@ -23,7 +23,7 @@
         </nav>
         <div class="jumbotron">
             <video src="../assets/Stranger Things 4 _ Undici, stai ascoltando.mp4" width="100%" height="550px" autoplay muted loop=1 ></video>
-            <audio src="../assets/videoplayback.mp4" autoplay @canplay="click"></audio>
+            <audio src="../assets/videoplayback.mp4" autoplay loop=1 @canplay="click"></audio>
         </div>
     </header>
 </template>
@@ -34,7 +34,8 @@ export default {
     data () {
         return {
             search: "",
-            clicked: true,
+            clicked: false,
+            topOfPage: true,
         }
     },
     methods: {
@@ -46,7 +47,17 @@ export default {
         },
         click(event) {
             console.log(event);
-        }
+        },
+        scrolling(){
+      if(window.pageYOffset>0){
+        if(this.topOfPage) this.topOfPage = false
+      } else {
+        if(!this.topOfPage) this.topOfPage = true
+      }
+    }
+    },
+    beforeMount() {
+        window.addEventListener('scroll', this.scrolling);
     }
 }
 </script>
@@ -54,6 +65,9 @@ export default {
 <style lang="scss" scoped>
     @import '~@fortawesome/fontawesome-free/css/all.min.css';
     @import '../style/mixin.scss';
+    .onScroll {
+    background-color: rgba($color: #151515, $alpha: 1.0);
+    }
     header {
         background-color: #151515;
         nav {
@@ -63,9 +77,9 @@ export default {
             width: 100%;
             position: fixed;
             z-index: 2;
-            @include wrapper;
+            padding: 20px 25px;
+            transition: ease-out 1s;
             .nav-right {
-                padding-left: 50px;
                 img {
                     width: 150px;
                 }
