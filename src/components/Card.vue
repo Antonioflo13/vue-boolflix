@@ -98,7 +98,7 @@ computed: {
             height: 10px;
         }
 
-        @media screen and (min-width: 420px) and (max-width: 1024px ) {
+        @media screen and (min-width: 320px) and (max-width: 1024px ) {
 
         }
 </style>
