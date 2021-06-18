@@ -80,7 +80,7 @@ export default {
         }
     }
 
-    @media screen and (min-width: 425px) {
+    @media screen and (min-width: 420px) and (min-width: 1024px ) {
         main {
             padding: 70px 0 0 0;
         }
