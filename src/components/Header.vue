@@ -127,7 +127,7 @@ export default {
         }
     }
 
-    @media screen and (min-width: 420px )  and (min-width: 1024px ) {
+    @media screen and (min-width: 420px )  and (max-width: 1024px ) {
         .onScroll {
             background-color: rgba($color: #151515, $alpha: 0.5);
         }
