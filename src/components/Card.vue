@@ -42,7 +42,7 @@ computed: {
             display: flex;
             justify-content: center;
             position: relative;
-            width: calc(100% / 6 - 10px);
+            width: calc(100% - 10px);
             height: 120px;
             margin: 5px;
             h4 {
@@ -54,7 +54,6 @@ computed: {
                 text-shadow: 0px -1px 3px #151515;
             }
             img {
-                width: 100%;
                 height: 100%;
                 object-fit: initial;
                 object-position: center;
@@ -84,16 +83,22 @@ computed: {
             background-color: #151515;
             cursor: pointer;
         }
-            @keyframes example {
+
+        // animation
+        @keyframes example {
             from {transform: scale(1,1);}
             to {transform: scale(1.5,3);}
-            }
-            #star {
-                font-size: 10px;
-                color: rgb(247, 200, 154);
-            }
-            #flag {
-                width: 30px;
-                height: 10px;
-            }
+        }
+        #star {
+            font-size: 10px;
+            color: rgb(247, 200, 154);
+        }
+        #flag {
+            width: 30px;
+            height: 10px;
+        }
+
+        @media screen and (min-width: 425px) {
+            
+        }
 </style>

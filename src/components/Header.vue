@@ -126,5 +126,32 @@ export default {
             }
         }
     }
+
+    @media screen and (min-width: 425px) {
+        .onScroll {
+            background-color: rgba($color: #151515, $alpha: 0.5);
+        }
+        header {
+            nav {
+                padding: 10px 0;
+                .nav-right {
+                    img {
+                        width: 100px;
+                    }
+                    ul li:nth-child(2),
+                    ul li:nth-child(3),
+                    ul li:nth-child(4),
+                    ul li:nth-child(5),
+                    ul li:nth-child(6)
+                     {
+                        display: none;
+                    }
+                }
+            }
+        }
+        .jumbotron video {
+            display: none;
+        }
+    }
     
 </style>

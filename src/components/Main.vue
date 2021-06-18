@@ -72,11 +72,17 @@ export default {
             }
             article {
                 display: flex;
-                flex-wrap: wrap;
+                overflow-x: auto;
             }
         }
         .search {
             padding: 30px 0;
+        }
+    }
+
+    @media screen and (min-width: 425px) {
+        main {
+            padding: 70px 0 0 0;
         }
     }
 </style>
